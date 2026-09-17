@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BL3Labs – KI-Sprachassistenten & Automation für die Hotellerie</title>
+    <style>
+        :root {
+            --bg-color: #f8faf9;
+            --text-color: #1a2521;
+            --text-muted: #5a6e65;
+            --accent-green: #10b981;
+            --accent-green-hover: #059669;
+            --card-bg: #ffffff;
+            --border-color: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1.25rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-color);
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--accent-green);
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+            flex: 1;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: #e6f4ea;
+            color: var(--accent-green-hover);
+            font-size: 0.875rem;
+            font-weight: 600;
+            padding: 0.35rem 0.85rem;
+            border-radius: 50px;
+            margin-bottom: 1.25rem;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1.25;
+            margin-bottom: 1.25rem;
+            color: #0f1715;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 750px;
+            margin: 0 auto 2rem auto;
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: var(--accent-green);
+            color: white;
+            padding: 0.85rem 1.75rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background-color 0.2s ease;
+        }
+
+        .cta-btn:hover {
+            background-color: var(--accent-green-hover);
+        }
+
+        .tech-stack {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .tech-stack p {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .tech-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .tech-item {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 0.4rem 1rem;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .agents-section {
+            margin-top: 4rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 1.75rem;
+            margin-bottom: 2rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.75rem;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-status {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #94a3b8;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #cbd5e1;
+            border-radius: 50%;
+        }
+
+        .widget-button {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: var(--accent-green);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 0.85rem 1.5rem;
+            font-weight: 600;
+            box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.3);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            z-index: 1000;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+
+        .widget-button:hover {
+            transform: translateY(-2px);
+            background-color: var(--accent-green-hover);
+        }
+
+        footer {
+            background-color: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            padding: 2rem;
+            margin-top: auto;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        footer a:hover {
+            color: var(--accent-green);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">BL3<span>Labs</span></div>
+        <div class="contact-header">
+            <a href="mailto:office@bl3labs.com" style="color: var(--text-muted); text-decoration: none; font-size: 0.9rem;">office@bl3labs.com</a>
+        </div>
+    </header>
+    <main>
+        <section class="hero">
+            <span class="badge">Für die Tourismus- &amp; Hotelbranche</span>
+            <h1>Entlastung der Hotelrezeption durch KI-Sprachassistenz</h1>
+            <p>Automatisch abgewickelte Telefonbuchungen und intelligenter Kundenservice rund um die Uhr – von Einzelbetrieben bis zu Hotelketten.</p>
+            <a href="#widget" class="cta-btn" onclick="openVoiceWidget()">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="22"></line></svg>
+                Testen Sie den Voice Agent
+            </a>
+            <div class="tech-stack">
+                <p>Unsere Technologie-Infrastruktur</p>
+                <div class="tech-badges">
+                    <span class="tech-item">ElevenLabs Voice AI</span>
+                    <span class="tech-item">n8n Automation Workflows</span>
+                    <span class="tech-item">Google Cloud Storage</span>
+                </div>
+            </div>
+        </section>
+        <section class="agents-section">
+            <h2 class="section-title">Anwendungsfälle &amp; Demos</h2>
+            <div class="grid">
+                <div class="card">
+                    <div>
+                        <h3>Zimmerreservierung</h3>
+                        <p>Automatisierte Abfrage von Verfügbarkeiten und Erfassung von Zimmerbuchungen per Telefon.</p>
+                    </div>
+                    <div class="card-status"><span class="card-status-dot"></span> In Kürze verfügbar</div>
+                </div>
+                <div class="card">
+                    <div>
+                        <h3>Rezeptions-Auskunft</h3>
+                        <p>Beantwortung häufiger Fragen zu Check-in-Zeiten, Frühstück und Hoteleinrichtungen.</p>
+                    </div>
+                    <div class="card-status"><span class="card-status-dot"></span> In Kürze verfügbar</div>
+                </div>
+                <div class="card">
+                    <div>
+                        <h3>Tischreservierung</h3>
+                        <p>KI-gestützte Tischbuchungen für das Hotelrestaurant ohne personellen Aufwand.</p>
+                    </div>
+                    <div class="card-status"><span class="card-status-dot"></span> In Kürze verfügbar</div>
+                </div>
+                <div class="card">
+                    <div>
+                        <h3>Storno &amp; Änderung</h3>
+                        <p>Schnelle und unkomplizierte Bearbeitung von Terminverschiebungen oder Absagen.</p>
+                    </div>
+                    <div class="card-status"><span class="card-status-dot"></span> In Kürze verfügbar</div>
+                </div>
+                <div class="card">
+                    <div>
+                        <h3>Event &amp; Seminar Support</h3>
+                        <p>Erstberatung und Datenerfassung für Tagungs- und Veranstaltungsanfragen.</p>
+                    </div>
+                    <div class="card-status"><span class="card-status-dot"></span> In Kürze verfügbar</div>
+                </div>
+                <div class="card">
+                    <div>
+                        <h3>Multi-Language Desk</h3>
+                        <p>Mehrsprachiger Kundenservice für internationale Hotelgäste in Echtzeit.</p>
+                    </div>
+                    <div class="card-status"><span class="card-status-dot"></span> In Kürze verfügbar</div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <button class="widget-button" onclick="openVoiceWidget()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="22"></line></svg>
+        Voice Agent
+    </button>
+    <footer>
+        <p>&copy; 2026 BL3Labs. Alle Rechte vorbehalten.</p>
+        <p>Kontakt: <a href="mailto:office@bl3labs.com">office@bl3labs.com</a></p>
+    </footer>
+    <script>
+        function openVoiceWidget() {
+            alert("Hier wird der ElevenLabs Voice Agent gestartet.");
+        }
+    </script>
+</body>
+</html>
