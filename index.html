@@ -303,6 +303,45 @@
         #voice-status { padding: 0 18px; }
         @media(max-width: 920px) { .industry-grid { grid-template-columns: repeat(2, 1fr); } }
         @media(max-width: 620px) { .industry-grid { grid-template-columns: 1fr; } .voice-controls { flex-wrap: wrap; } }
+    
+        /* ── EIGENEN KI-VOICE-AGENT ANFRAGEN — Formular-Dialog ── */
+        .btn-navy { color: var(--white); background: var(--navy); box-shadow: 0 10px 25px rgba(16,46,35,.18); }
+        .btn-navy:hover { background: #1b4434; }
+        .agent-modal { padding: 30px; }
+        .agent-modal .modal-top h2 { font-size: clamp(1.45rem, 3.2vw, 1.85rem); line-height: 1.2; }
+        .af-form { margin-top: 24px; }
+        .af-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 14px; }
+        .af-field { margin-bottom: 15px; }
+        .af-label { display: block; margin-bottom: 6px; font-size: .8rem; font-weight: 600; color: var(--ink); }
+        .af-req { color: var(--green-dark); }
+        .af-input, .af-textarea { width: 100%; border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; font: inherit; font-size: .95rem; color: var(--ink); background: var(--cream); transition: border-color .2s, box-shadow .2s, background .2s; }
+        .af-textarea { min-height: 84px; resize: vertical; }
+        .af-input::placeholder, .af-textarea::placeholder { color: #93a39d; }
+        .af-input:focus, .af-textarea:focus { outline: none; border-color: var(--green-dark); background: var(--white); box-shadow: 0 0 0 3px rgba(40,123,73,.14); }
+        .af-input[aria-invalid="true"] { border-color: #c0392b; }
+        .af-drop { position: relative; border: 2px dashed var(--line); border-radius: 14px; padding: 16px; text-align: center; background: var(--mint-soft); cursor: pointer; transition: border-color .2s, background .2s; }
+        .af-drop:hover, .af-drop.is-drag { border-color: var(--green); background: var(--mint); }
+        .af-drop input[type=file] { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
+        .af-drop-inner { display: flex; flex-direction: column; align-items: center; gap: 4px; pointer-events: none; font-size: .82rem; }
+        .af-drop-inner svg { color: var(--green-dark); }
+        .af-drop-hint { color: var(--muted); font-size: .74rem; }
+        .af-file-on { color: var(--green-dark); font-weight: 600; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .af-submit { width: 100%; margin-top: 6px; border: 0; cursor: pointer; font: inherit; font-weight: 600; }
+        .af-submit:disabled { opacity: .6; cursor: wait; transform: none; }
+        .af-spinner { display: none; width: 18px; height: 18px; border: 2px solid rgba(255,255,255,.35); border-top-color: #fff; border-radius: 50%; animation: af-spin .7s linear infinite; }
+        .af-error { display: none; margin-top: 12px; padding: 10px 14px; border-radius: 12px; background: #fdecea; color: #922b21; font-size: .85rem; }
+        .af-privacy { margin-top: 14px; color: var(--muted); font-size: .76rem; text-align: center; }
+        .af-privacy a { color: var(--green-dark); }
+        .af-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+        .af-success { display: none; padding: 46px 30px 34px; text-align: center; }
+        .af-check { width: 62px; height: 62px; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: var(--green-dark); background: var(--mint); }
+        .af-success h2 { font-size: 1.6rem; }
+        .af-success p { margin: 12px auto 24px; max-width: 420px; color: var(--muted); }
+        @keyframes af-spin { to { transform: rotate(360deg); } }
+        @media (max-width: 620px) {
+            .agent-modal { padding: 22px 18px; }
+            .af-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
@@ -330,7 +369,7 @@
                             <svg aria-hidden="true" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v3"/></svg>
                             Ausprobieren
                         </button>
-                        <a class="btn btn-secondary" href="mailto:office@bl3labs.com?subject=BL3Labs%20Demo">Demo vereinbaren →</a>
+                        <a class="btn btn-navy" href="mailto:office@bl3labs.com?subject=BL3Labs%20Demo" data-agent-form aria-haspopup="dialog" aria-controls="agent-dialog"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M12 18v-6M9 15h6"/></svg> Eigenen KI-Agenten anfragen</a>
                     </div>
                     <div class="hero-note"><span class="avatars" aria-hidden="true"><span class="avatar">DE</span><span class="avatar">EN</span><span class="avatar">IT</span></span> Rund um die Uhr · Mehrsprachig · Freundlich und natürlich</div>
                 </div>
@@ -436,7 +475,7 @@
                     <h2>So klingt Entlastung für Ihr Unternehmen.</h2>
                     <p>Wir zeigen Ihnen in einer persönlichen Demo, wie BL3Labs die Anrufe in Ihrem Unternehmen übernehmen kann.</p>
                 </div>
-                <a class="btn btn-primary" href="mailto:office@bl3labs.com?subject=Persönliche%20BL3Labs%20Demo">Demo vereinbaren →</a>
+                <a class="btn btn-primary" href="mailto:office@bl3labs.com?subject=Persönliche%20BL3Labs%20Demo" data-agent-form aria-haspopup="dialog" aria-controls="agent-dialog">Eigenen KI-Agenten anfragen →</a>
             </div>
         </section>
     </main>
@@ -458,6 +497,42 @@
             <p class="modal-note">Sie sprechen mit einer KI. Bitte verwenden Sie für die Demo keine sensiblen persönlichen Angaben.</p>
         </div>
     </dialog>
+    <!-- ============ EIGENEN KI-VOICE-AGENT ANFRAGEN — Dialog + Formular ============ -->
+    <dialog id="agent-dialog" aria-labelledby="agent-title">
+        <div class="agent-modal" id="af-card">
+            <div class="modal-top"><div><span class="eyebrow">Ihr eigener KI-Voice-Agent</span><h2 id="agent-title">Leonie für Ihr Unternehmen – passend eingerichtet.</h2><p>Hinterlassen Sie Ihre Kontaktdaten. Wir richten einen Voice-Agenten nach Ihren Abläufen ein und melden uns mit einer persönlichen Demo.</p></div><button class="close-modal" id="agent-close" aria-label="Schließen" type="button">×</button></div>
+            <form class="af-form" id="af-form" novalidate>
+                <div class="af-hp" aria-hidden="true"><label for="af-company-hp">Firma</label><input id="af-company-hp" name="company_hp" type="text" tabindex="-1" autocomplete="off"></div>
+                <div class="af-grid">
+                    <div class="af-field"><label class="af-label" for="af-name">Vor- und Nachname <span class="af-req">*</span></label><input class="af-input" id="af-name" name="name" type="text" autocomplete="name" required placeholder="z. B. Anna Huber"></div>
+                    <div class="af-field"><label class="af-label" for="af-company">Unternehmen</label><input class="af-input" id="af-company" name="company" type="text" autocomplete="organization" placeholder="z. B. Huber Haustechnik GmbH"></div>
+                </div>
+                <div class="af-grid">
+                    <div class="af-field"><label class="af-label" for="af-email">E-Mail <span class="af-req">*</span></label><input class="af-input" id="af-email" name="email" type="email" autocomplete="email" required placeholder="name@unternehmen.at"></div>
+                    <div class="af-field"><label class="af-label" for="af-phone">Telefon <span class="af-req">*</span></label><input class="af-input" id="af-phone" name="phone" type="tel" autocomplete="tel" required placeholder="+43 660 1234567"></div>
+                </div>
+                <div class="af-field"><label class="af-label" for="af-website">Website</label><input class="af-input" id="af-website" name="website" type="url" autocomplete="url" placeholder="https://www.ihr-unternehmen.at"></div>
+                <div class="af-field"><label class="af-label" for="af-notes">Welche Aufgaben soll Ihr Voice-Agent übernehmen?</label><textarea class="af-textarea" id="af-notes" name="notes" rows="3" placeholder="z. B. Terminvereinbarung, Anfragen aufnehmen, Rückrufe koordinieren, Öffnungszeiten erklären …"></textarea></div>
+                <div class="af-field"><span class="af-label">Unterlagen anhängen (optional, z. B. Preisliste, FAQ, Leistungsübersicht)</span>
+                    <div class="af-drop" id="af-drop">
+                        <input id="af-file" name="file" type="file" accept=".pdf,.doc,.docx,.png,.jpg,.jpeg" aria-label="Datei anhängen">
+                        <div class="af-drop-inner"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4m0 0-4 4m4-4 4 4"/><path d="M3 16v3a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-3"/></svg><span id="af-file-label"><span>Datei auswählen oder hierher ziehen</span><br><span class="af-drop-hint">PDF, DOCX, PNG oder JPG · max. 20 MB</span></span></div>
+                    </div>
+                </div>
+                <button class="btn btn-primary af-submit" id="af-submit" type="submit"><span class="af-spinner" id="af-spinner"></span><span id="af-submit-text">Anfrage senden →</span></button>
+                <p class="af-error" id="af-error" role="alert"></p>
+                <p class="af-privacy">Ihre Angaben verwenden wir ausschließlich zur Bearbeitung Ihrer Anfrage. Details in der <a href="#">Datenschutzerklärung</a>.</p>
+            </form>
+        </div>
+        <div class="af-success" id="af-success" role="status">
+            <div class="af-check"><svg aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <h2>Vielen Dank! Ihre Anfrage ist da.</h2>
+            <p>Wir sehen uns Ihre Angaben an und melden uns in Kürze persönlich bei Ihnen – mit einem Vorschlag für Ihren eigenen Voice-Agenten.</p>
+            <button class="btn btn-secondary" id="af-reset" type="button">Weitere Anfrage senden</button>
+            <button class="btn btn-primary" id="af-done" type="button">Schließen</button>
+        </div>
+    </dialog>
+
 
     <script>
         const feed = document.querySelector('#call-feed');
@@ -569,7 +644,17 @@
             voiceStart.hidden = false;
             voiceEnd.hidden = true;
         }
+        let callWasLive = false;
+        function offerAgentForm() {
+            if (!callWasLive) return;
+            callWasLive = false;
+            window.setTimeout(() => {
+                if (voiceDialog.open) voiceDialog.close();
+                if (typeof window.openAgentForm === 'function') window.openAgentForm();
+            }, 900);
+        }
         async function stopVoice() {
+            offerAgentForm();
             attempt++;
             const active = conversation;
             conversation = null;
@@ -605,6 +690,7 @@
                     connectionType: 'webrtc',
                     onConnect: () => {
                         if (current !== attempt) return;
+                        callWasLive = true;
                         voiceStatus.textContent = 'Verbunden. Leonie ist für Sie da.';
                         voiceStart.hidden = true;
                         voiceEnd.hidden = false;
@@ -617,6 +703,7 @@
                         conversation = null;
                         attempt++;
                         resetVoice('Das Gespräch wurde beendet.');
+                        offerAgentForm();
                         voiceStart.disabled = pending;
                     },
                     onError: () => {
@@ -639,8 +726,125 @@
                 voiceStart.disabled = false;
             }
         });
-        window.addEventListener('pagehide', () => { void stopVoice(); });
+        window.addEventListener('pagehide', () => { callWasLive = false; void stopVoice(); });
 
+    </script>
+
+    <script id="agent-form-script">
+    (function () {
+        // Google Apps Script Web-App (Google Sheet + Drive-Ordner + E-Mail an office@bl3labs.com)
+        // Nach dem Bereitstellen die /exec-URL hier eintragen.
+        const ENDPOINT = 'https://script.google.com/macros/s/AKfycbwlVQH3WIagUORnfwGASB8adX1kxGy0-Ors-5DByg2E59gnB4HBgNMAof4gkpGA5MnOjw/exec';
+        const MAX_FILE_MB = 20;
+
+        const dlg = document.getElementById('agent-dialog');
+        const form = document.getElementById('af-form');
+        const card = document.getElementById('af-card');
+        const success = document.getElementById('af-success');
+        const fileInput = document.getElementById('af-file');
+        const drop = document.getElementById('af-drop');
+        const fileLabel = document.getElementById('af-file-label');
+        const submit = document.getElementById('af-submit');
+        const submitText = document.getElementById('af-submit-text');
+        const spinner = document.getElementById('af-spinner');
+        const errorBox = document.getElementById('af-error');
+        const fileLabelDefault = fileLabel.innerHTML;
+        let file = null;
+        if (!dlg || !form) return;
+
+        function openForm() {
+            if (dlg.open) return;
+            dlg.showModal();
+            if (card.style.display !== 'none') window.setTimeout(() => document.getElementById('af-name').focus(), 50);
+        }
+        window.openAgentForm = openForm;
+        document.querySelectorAll('[data-agent-form]').forEach(el => el.addEventListener('click', e => { e.preventDefault(); openForm(); }));
+        document.getElementById('agent-close').addEventListener('click', () => dlg.close());
+        document.getElementById('af-done').addEventListener('click', () => dlg.close());
+        dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
+
+        function esc(t) { const d = document.createElement('div'); d.textContent = t; return d.innerHTML; }
+        function showError(msg) { errorBox.textContent = msg; errorBox.style.display = msg ? 'block' : 'none'; }
+        function setFile(f) {
+            if (f && f.size > MAX_FILE_MB * 1048576) {
+                showError('Die Datei ist größer als ' + MAX_FILE_MB + ' MB. Bitte wählen Sie eine kleinere Datei.');
+                fileInput.value = ''; f = null;
+            } else { showError(''); }
+            file = f;
+            fileLabel.innerHTML = f ? '<span class="af-file-on">Angehängt: ' + esc(f.name) + ' (' + (f.size / 1048576).toFixed(1) + ' MB)</span>' : fileLabelDefault;
+        }
+        fileInput.addEventListener('change', () => setFile(fileInput.files[0] || null));
+        ['dragenter', 'dragover'].forEach(ev => drop.addEventListener(ev, () => drop.classList.add('is-drag')));
+        ['dragleave', 'drop'].forEach(ev => drop.addEventListener(ev, () => drop.classList.remove('is-drag')));
+
+        function toBase64(f) {
+            return new Promise((resolve, reject) => {
+                const r = new FileReader();
+                r.onload = () => resolve(String(r.result).split(',')[1] || '');
+                r.onerror = reject;
+                r.readAsDataURL(f);
+            });
+        }
+
+        form.addEventListener('submit', async e => {
+            e.preventDefault();
+            showError('');
+            const v = id => document.getElementById(id).value.trim();
+            const required = ['af-name', 'af-email', 'af-phone'];
+            let firstInvalid = null;
+            required.forEach(id => {
+                const bad = !v(id) || (id === 'af-email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v(id)));
+                document.getElementById(id).setAttribute('aria-invalid', bad ? 'true' : 'false');
+                if (bad && !firstInvalid) firstInvalid = document.getElementById(id);
+            });
+            if (firstInvalid) {
+                showError('Bitte füllen Sie Name, eine gültige E-Mail-Adresse und Telefon aus.');
+                firstInvalid.focus();
+                return;
+            }
+            if (!ENDPOINT) {
+                console.error('Agent-Formular: ENDPOINT ist nicht gesetzt.');
+                showError('Das Formular ist noch nicht freigeschaltet. Bitte schreiben Sie uns an office@bl3labs.com.');
+                return;
+            }
+
+            submit.disabled = true; spinner.style.display = 'inline-block'; submitText.textContent = 'Wird gesendet …';
+            try {
+                const payload = {
+                    name: v('af-name'), email: v('af-email'), phone: v('af-phone'),
+                    company: v('af-company'), website: v('af-website'), notes: v('af-notes'),
+                    pageUrl: window.location.href,
+                    device: /Mobile|Android|iPhone/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
+                    sessionId: (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : String(Date.now()),
+                    company_hp: document.getElementById('af-company-hp').value
+                };
+                if (file) payload.file = { name: file.name, type: file.type || 'application/octet-stream', data: await toBase64(file) };
+
+                // text/plain = "simple request" ohne CORS-Preflight; Apps Script leitet auf
+                // googleusercontent.com um, das CORS erlaubt – die Antwort ist lesbar.
+                const res = await fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) });
+                if (!res.ok) throw new Error('HTTP ' + res.status);
+                let data = null;
+                try { data = JSON.parse(await res.text()); } catch (_) {}
+                if (data && data.ok === false) throw new Error(data.error || 'Unbekannter Fehler');
+
+                card.style.display = 'none';
+                success.style.display = 'block';
+            } catch (err) {
+                console.error('Agent-Formular:', err);
+                showError('Beim Senden ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder schreiben Sie an office@bl3labs.com.');
+            } finally {
+                submit.disabled = false; spinner.style.display = 'none'; submitText.textContent = 'Anfrage senden →';
+            }
+        });
+
+        document.getElementById('af-reset').addEventListener('click', () => {
+            form.reset(); setFile(null); showError('');
+            form.querySelectorAll('[aria-invalid]').forEach(el => el.removeAttribute('aria-invalid'));
+            success.style.display = 'none'; card.style.display = 'block';
+            document.getElementById('af-name').focus();
+        });
+    })();
     </script>
 </body>
 </html>
