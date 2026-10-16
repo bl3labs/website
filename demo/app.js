@@ -74,7 +74,7 @@ async function stop(message = 'Gespräch beendet. Bis zum nächsten Mal!') {
   finally { reset(message); }
 }
 async function loadSDK() {
-  sdkPromise ??= import('https://esm.sh/@elevenlabs/client@1.25.0?bundle').catch(error => {
+  sdkPromise ??= import('/vendor/elevenlabs-client-1.25.0.js').catch(error => {
     sdkPromise = null;
     throw error;
   });
