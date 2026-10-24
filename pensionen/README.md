@@ -11,3 +11,5 @@ The inquiry form uses the existing homepage's Google Apps Script endpoint and pa
 Validation: desktop browser and 390px iframe layout inspected; demo opening, unchecked consent with disabled start button, and frame removal on closing checked. JavaScript syntax and mocked form response paths checked. A real microphone conversation and actual inquiry delivery have not been tested.
 
 The page is noindex while awaiting review. Remove that meta tag when approving public release. Merge into main only after approval, since main may trigger the public GitHub Pages deployment.
+
+Copy was edited for natural standard German suitable for Bavarian and western Austrian hospitality businesses. The hero now uses a generated Alpine guesthouse photo illustration; its provenance and prompt are documented in assets/README.md. The revised copy and hero crop were reviewed again at desktop and 390px widths.
