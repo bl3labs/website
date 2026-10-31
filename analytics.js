@@ -85,7 +85,7 @@
     if (!dialog.open) dialog.showModal();
   }
   const style = document.createElement('link');
-  style.rel = 'stylesheet'; style.href = '/analytics.css';
+  style.rel = 'stylesheet'; style.href = '/analytics.css?v=20261031-4';
   document.head.appendChild(style);
   dialog = document.createElement('dialog');
   dialog.id = 'bl3-analytics-dialog';
