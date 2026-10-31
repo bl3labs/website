@@ -91,7 +91,7 @@
   dialog.id = 'bl3-analytics-dialog';
   dialog.setAttribute('aria-labelledby', 'bl3-analytics-title');
   dialog.setAttribute('aria-describedby', 'bl3-analytics-description');
-  dialog.innerHTML = '<h2 id="bl3-analytics-title">Cookies</h2><p id="bl3-analytics-description">Mit Ihrer Einwilligung nutzt BL3 Labs Statistik-Cookies von Google Analytics, um zu messen, woher Besucher kommen und wie sie unsere Website nutzen.</p><p>Jederzeit unter „Datenschutzeinstellungen“ widerrufbar. <a href="/datenschutz.html#analytics">Datenschutzerklärung</a></p><div class="bl3-analytics-actions"><button type="button" data-choice="no" autofocus>Cookies nicht akzeptieren</button><button type="button" data-choice="yes">Cookies akzeptieren</button></div><button type="button" class="bl3-analytics-close">Schließen</button>';
+  dialog.innerHTML = '<h2 id="bl3-analytics-title">Cookies</h2><p id="bl3-analytics-description">Wir nutzen Google Analytics für Besucherstatistiken – nur mit Ihrer Einwilligung.</p><p>Jederzeit unter „Datenschutzeinstellungen“ widerrufbar. <a href="/datenschutz.html#analytics">Datenschutzerklärung</a></p><div class="bl3-analytics-actions"><button type="button" data-choice="no" autofocus>Cookies nicht akzeptieren</button><button type="button" data-choice="yes">Cookies akzeptieren</button></div><button type="button" class="bl3-analytics-close">Schließen</button>';
   document.body.appendChild(dialog);
   dialog.querySelector('[data-choice="no"]').addEventListener('click', () => save(false));
   dialog.querySelector('[data-choice="yes"]').addEventListener('click', () => save(true));
