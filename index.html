@@ -373,6 +373,7 @@
             .service-ticker li:nth-child(7)::after { display: none; }
         }
     </style>
+<script defer src="/analytics.js"></script>
 </head>
 <body>
     <header class="site-header">
@@ -695,7 +696,7 @@
             resetVoice('Gespräch beendet. Bis zum nächsten Mal!');
             voiceStart.disabled = pending;
         }
-        document.querySelector('#try-agent').addEventListener('click', () => voiceDialog.showModal());
+        document.querySelector('#try-agent').addEventListener('click', () => { window.BL3Analytics?.track('demo_open'); voiceDialog.showModal(); });
         document.querySelector('#voice-close').addEventListener('click', () => voiceDialog.close());
         voiceDialog.addEventListener('close', stopVoice);
         voiceEnd.addEventListener('click', stopVoice);
@@ -724,6 +725,7 @@
                     onConnect: () => {
                         if (current !== attempt) return;
                         callWasLive = true;
+                        window.BL3Analytics?.track('demo_start');
                         voiceStatus.textContent = 'Verbunden. Leonie ist für Sie da.';
                         voiceStart.hidden = true;
                         voiceEnd.hidden = false;
@@ -788,6 +790,7 @@
         function openForm() {
             if (dlg.open) return;
             dlg.showModal();
+            window.BL3Analytics?.track('inquiry_open');
             if (card.style.display !== 'none') window.setTimeout(() => document.getElementById('af-name').focus(), 50);
         }
         window.openAgentForm = openForm;
@@ -863,6 +866,7 @@
 
                 card.style.display = 'none';
                 success.style.display = 'block';
+                if (data?.ok === true) window.BL3Analytics?.track('generate_lead');
             } catch (err) {
                 console.error('Agent-Formular:', err);
                 showError('Beim Senden ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder schreiben Sie an office@bl3labs.com.');

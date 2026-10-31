@@ -1,0 +1,10 @@
+#bl3-analytics-dialog{box-sizing:border-box;width:min(540px,calc(100% - 32px));max-height:85vh;overflow:auto;padding:28px;border:1px solid #cbd9ce;border-radius:18px;background:#faf9f3;color:#163d2a;box-shadow:0 20px 80px #102e2333;font:14px/1.65 system-ui,sans-serif;text-align:left}
+#bl3-analytics-dialog::backdrop{background:#102e2380}
+#bl3-analytics-dialog h2{margin:0 0 14px;font-size:24px;line-height:1.25;color:#163d2a}
+#bl3-analytics-dialog p{font-size:14px;color:#3b5546;margin:0 0 16px}
+#bl3-analytics-dialog a{color:#205f3c;text-decoration:underline}
+.bl3-analytics-actions{display:flex;gap:12px;flex-wrap:wrap}
+#bl3-analytics-dialog .bl3-analytics-actions button{flex:1 1 200px;padding:12px 14px;min-height:48px;border:1px solid #286140;border-radius:9px;background:#286140;color:#fff;font:600 14px/1.4 system-ui,sans-serif;cursor:pointer}
+#bl3-analytics-dialog .bl3-analytics-close{display:block;margin:16px 0 0;padding:4px;border:0;background:none;color:#205f3c;text-decoration:underline;font:14px system-ui,sans-serif;cursor:pointer}
+#bl3-analytics-settings{position:fixed;left:12px;bottom:12px;z-index:9999;padding:8px 11px;max-width:calc(100% - 24px);border:1px solid #b6cabd;border-radius:8px;background:#faf9f3;color:#205f3c;box-shadow:0 2px 8px #102e231a;font:12px/1.4 system-ui,sans-serif;cursor:pointer}
+#bl3-analytics-dialog button:focus-visible,#bl3-analytics-settings:focus-visible{outline:3px solid #6ca97d;outline-offset:3px}

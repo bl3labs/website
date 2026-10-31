@@ -56,6 +56,7 @@ function updateTimer() {
 }
 function connected() {
   if (state !== 'connected') {
+    window.BL3Analytics?.track('demo_start');
     startedAt = Date.now();
     updateTimer();
     timer = setInterval(updateTimer,1000);

@@ -14,7 +14,7 @@ The linked agent must allow public browser conversations from this domain. Priva
 
 Consent is unchecked on entry and after each session. `demo_consent`, `demo_consent_at` (UTC ISO timestamp), and `demo_consent_version` are passed as session dynamic variables. These are client-submitted metadata, not an independently verified consent audit log. The checkbox does not enable ElevenLabs recording or replace the agent's own consent workflow. Configure recording and retention in the agent account to match the displayed notice and finalize the full privacy notice before broader public use.
 
-IDs, labels and company names in the URL are public. Put no personal data or secrets in links. Agent and branch IDs are validated; labels use textContent. The page uses no analytics, cookies or browser-local persistence of transcripts or audio. It does not request the microphone or load the voice SDK until the user explicitly starts.
+IDs, labels and company names in the URL are public. Put no personal data or secrets in links. Agent and branch IDs are validated; labels use textContent. Optional GA4 analytics is shared with the main website and requires separate statistics consent. No transcripts, audio, agent IDs or visitor-supplied labels are sent to Analytics. No browser-local persistence of transcripts or audio is used. It does not request the microphone or load the voice SDK until the user explicitly starts.
 
 ## Files
 
